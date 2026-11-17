@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: ecom-backend
+    runtime: python
+    plan: free
+    rootDir: BackEnd
+    buildCommand: pip install -r requirements.txt && python manage.py collectstatic --noinput
+    preDeployCommand: python manage.py migrate
+    startCommand: gunicorn BackEnd.wsgi
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.0
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
+      - key: CORS_ALLOWED_ORIGINS
+        value: https://<vercel-frontend-url>
+      - key: DB_NAME
+        fromDatabase:
+          name: ecom-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: ecom-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ecom-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: ecom-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: ecom-db
+          property: port
+databases:
+  - name: ecom-db
+    plan: free

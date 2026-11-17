@@ -4,7 +4,7 @@ import CartPage from "./Pages/CartPage";
 import ProductList from "./Pages/ProducList"
 import Navbar from "./Components/Navbar";
 import CheckoutPage from "./Pages/checkoutPage";
-import PrivateRoute from "./Components/privateRoute";
+import PrivateRoute from "./Components/PrivateRoute";
 import Signup from "./Pages/Singup";
 import Login from "./Pages/Login";
 function App() {
